@@ -2,6 +2,7 @@
 
 ## What is Zod?
 
+- It is a library for runtime type checking and schema validation
 - Parse data with a pre-defined schema
 - TypeScript-first
 
