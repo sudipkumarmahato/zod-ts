@@ -6,33 +6,37 @@ const schema = z
       required_error: "Name is required",
       invalid_type_error: "Name must be a string",
     }),
-    age: z.number(),
-    isAlive: z.boolean(),
-    hobbies: z.array(z.string()),
-    address: z.object({
-      street: z.string(),
-    }),
+    password: z
+      .string({
+        required_error: "Password is required",
+        invalid_type_error: "Password must be a string",
+      })
+      .min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string({}),
   })
-  .passthrough();
+  .refine(
+    (data) => {
+      console.log(data);
+
+      return data.password === data.confirmPassword;
+    },
+    {
+      message: "Passwords do not match",
+    }
+  );
 
 type CreateUserInput = z.infer<typeof schema>;
 
 function createUser(props: CreateUserInput) {
-  const result = schema.safeParse(props);
+  const result = schema.parse(props);
 
   return result;
 }
 
 const payload: CreateUserInput = {
   name: "John Doe",
-  age: 30,
-  isAlive: true,
-  hobbies: ["coding", "reading"],
-  address: {
-    street: "123 Main St",
-  },
-  // @ts-ignore
-  isUnknown: true,
+  password: "123456",
+  confirmPassword: "123456",
 };
 
 const result = createUser(payload);

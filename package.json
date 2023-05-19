@@ -1,9 +1,6 @@
 {
   "scripts": {
-    "1": "tsx watch basics.ts",
-    "2": "tsx watch parsing.ts",
-    "3": "tsx watch refine.ts",
-    "4": "tsx watch enums.ts"
+    "dev": "ts-node basic.ts"
   },
   "dependencies": {
     "joi": "^17.9.2",
