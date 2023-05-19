@@ -50,5 +50,3 @@
 
 - Zod enums
 - Native enums
-
-## Benchmarks
